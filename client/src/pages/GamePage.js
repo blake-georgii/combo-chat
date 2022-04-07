@@ -18,21 +18,21 @@ const GamePage = () => {
               </Jumbotron>
               <Container>
                 <h2>
-                  {userData.savedBooks.length
-                    ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
-                    : 'You have no saved books!'}
+                  {userData.savedGames.length
+                    ? `Viewing ${userData.savedGames.length} saved ${userData.savedGames.length === 1 ? 'game' : 'games'}:`
+                    : 'You have no saved games!'}
                 </h2>
                 <CardColumns>
-                  {userData.savedBooks.map((book) => {
+                  {userData.savedGames.map((game) => {
                     return (
-                      <Card key={book.bookId} border='dark'>
-                        {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
+                      <Card key={game.gameId} border='dark'>
+                        {game.image ? <Card.Img src={game.image} alt={`The cover for ${game.title}`} variant='top' /> : null}
                         <Card.Body>
-                          <Card.Title>{book.title}</Card.Title>
-                          <p className='small'>Authors: {book.authors}</p>
-                          <Card.Text>{book.description}</Card.Text>
-                          <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
-                            Delete this Book!
+                          <Card.Title>{game.title}</Card.Title>
+                          <p className='small'>Studio: {game.studios}</p>
+                          <Card.Text>{game.description}</Card.Text>
+                          <Button className='btn-block btn-danger' onClick={() => handleDeletegame(game.gameId)}>
+                            Delete this game!
                           </Button>
                         </Card.Body>
                       </Card>
