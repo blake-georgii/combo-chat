@@ -22,7 +22,6 @@ const typeDefs = gql`
     type Comment {
         user: String
         text: String
-        createdAt: Date
     }
 
     type Auth {
@@ -40,7 +39,7 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         addGame(gameId: String!, title: String!, image:String, link:String, author:[String], description: String!): User
         removeGame(gameId:String!): User
-        addComment(user: String!, text: String, createdAt: Date) Game
+        addComment(user: String!, text: String): Game
     }   
 `;
 

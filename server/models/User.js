@@ -22,7 +22,7 @@ const userSchema = new Schema(
       required: true,
     },
     // set savedGames to be an array of data that adheres to the gameSchema
-    savedGames: [gameSchema],
+    // savedGames: [gameSchema],
   },
   // set this to use virtual below
   {

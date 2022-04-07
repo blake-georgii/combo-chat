@@ -4,6 +4,10 @@ const commentSchema = require('./Comment');
 // This is a subdocument schema, it won't become its own model but we'll use it as the schema for the User's `savedBooks` array in User.js
 const gameSchema = new Schema(
   {
+    gameId: {
+      type: String,
+      required: true,
+    },
     authors: [
       {
         type: String,
@@ -14,10 +18,6 @@ const gameSchema = new Schema(
       required: true,
     },
     // saved game id from IGdb
-    gameId: {
-      type: String,
-      required: true,
-    },
     image: {
       type: String,
     },
@@ -36,10 +36,6 @@ const gameSchema = new Schema(
     },
   }
 );
-
-userSchema.virtual('gameCount').get(function () {
-  return this.savedGames.length;
-});
 
 const Game = model('Game', gameSchema);
 

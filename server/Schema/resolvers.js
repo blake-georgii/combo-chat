@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Game } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -43,7 +43,7 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addGames: async (parent, args, context) => {
+    addGame: async (parent, args, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -63,7 +63,7 @@ const resolvers = {
           { new: true }
         );
         if (!updatedUser) {
-          throw new AuthenticationError('Couldnt find user with that Id')
+          throw new AuthenticationError("Couldn't find user with that Id")
         }
         return updatedUser;
       }
