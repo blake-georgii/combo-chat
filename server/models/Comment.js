@@ -9,7 +9,6 @@ const commentSchema = new Schema({
         type: String,
         required: true,
     },
-    // saved game id from IGdb
     createdAt: {
         type: Date,
         default: Date.now,

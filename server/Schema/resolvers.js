@@ -43,11 +43,11 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addBook: async (parent, args, context) => {
+    addGames: async (parent, args, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedBooks: args } },
+          { $addToSet: { savedGames: args } },
           { new: true, runValidators: true }
         );
         return updatedUser;
@@ -55,11 +55,11 @@ const resolvers = {
 
       throw new AuthenticationError('User Not Logged In')
     },
-    removeBook: async (parent, { bookId }, context) => {
+    removeGame: async (parent, { gameId }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: { bookId: bookId } } },
+          { $pull: { savedGames: { GameId: GameId } } },
           { new: true }
         );
         if (!updatedUser) {
