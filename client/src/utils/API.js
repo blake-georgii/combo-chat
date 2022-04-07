@@ -43,15 +43,17 @@ export const saveBook = (bookData, token) => {
 // remove saved book data for a logged in user
 export const deleteBook = (bookId, token) => {
   return fetch(`/api/users/books/${bookId}`, {
-    method: 'DELETE',
+    method: 'GET',
     headers: {
       authorization: `Bearer ${token}`,
     },
   });
 };
 
-// make a search to google books api
 export const searchGoogleBooks = (query) => {
-  return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+  // return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+  return fetch(`https://api.rawg.io/api/games?search=${query}&key=${process.env.REACT_APP_RAWG_KEY}
+  `);
 };
+
 

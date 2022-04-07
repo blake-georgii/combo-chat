@@ -38,14 +38,20 @@ const SearchBooks = () => {
         throw new Error('something went wrong!');
       }
 
-      const { items } = await response.json();
+      const items = await response.json();
 
-      const bookData = items.map((book) => ({
-        bookId: book.id,
-        authors: book.volumeInfo.authors || ['No author to display'],
-        title: book.volumeInfo.title,
-        description: book.volumeInfo.description,
-        image: book.volumeInfo.imageLinks?.thumbnail || '',
+      const bookData = items.results.map((book) => ({
+        // bookId: book.id,
+        // authors: book.volumeInfo.authors || ['No author to display'],
+        // title: book.volumeInfo.title,
+        // description: book.volumeInfo.description,
+        // image: book.volumeInfo.imageLinks?.thumbnail || '',
+
+         // bookId: book.id,
+        authors: book.name || ['No author to display'],
+        // title: book.volumeInfo.title,
+        // description: book.released,
+        image: book.background_image || '',
       }));
 
       setSearchedBooks(bookData);
@@ -83,7 +89,7 @@ const SearchBooks = () => {
     <>
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
-          <h1>Search for Books!</h1>
+          <h1>Search for Games!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
               <Col xs={12} md={8}>
@@ -113,16 +119,17 @@ const SearchBooks = () => {
             : 'Search for a book to begin'}
         </h2>
         <CardColumns>
-          {searchedBooks.map((book) => {
+          {searchedBooks.map((book, index) => {
+            console.log("MY BOOK\n\n", book )
             return (
-              <Card key={book.bookId} border='dark'>
+              <Card key={index} border='dark'>
                 {book.image ? (
                   <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{book.title}</Card.Title>
+                  <Card.Title>{book.name}</Card.Title>
                   <p className='small'>Authors: {book.authors}</p>
-                  <Card.Text>{book.description}</Card.Text>
+                  <Card.Text>{book.name}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedBookIds?.some((savedBookId) => savedBookId === book.bookId)}
