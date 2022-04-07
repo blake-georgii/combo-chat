@@ -50,7 +50,7 @@ export const deleteBook = (bookId, token) => {
   });
 };
 
-export const searchGoogleBooks = (query) => {
+export const searchGames = (query) => {
   // return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
   return fetch(`https://api.rawg.io/api/games?search=${query}&key=${process.env.REACT_APP_RAWG_KEY}
   `);
