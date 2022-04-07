@@ -40,7 +40,7 @@ const SavedBooks = () => {
     <>
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
-          <h1>Viewing saved books!</h1>
+          <h1>Viewing saved games!</h1>
         </Container>
       </Jumbotron>
       <Container>
@@ -56,10 +56,10 @@ const SavedBooks = () => {
                 {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
-                  <p className='small'>Authors: {book.authors}</p>
+                  <p className='small'>Game developers {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
                   <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
-                    Delete this Book!
+                    Take the game off!
                   </Button>
                 </Card.Body>
               </Card>
