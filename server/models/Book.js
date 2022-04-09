@@ -7,25 +7,25 @@ const bookSchema = new Schema({
       type: String,
     },
   ],
-  description: {
-    type: String,
-    required: true,
+  name: {
+    type: String
   },
-  // saved book id from GoogleBooks
-  bookId: {
-    type: String,
-    required: true,
+  // // saved book id from GoogleBooks
+  // bookId: {
+  //   type: String,
+  //   required: true,
+  // },
+  image_background: {
+    type: String
   },
-  image: {
-    type: String,
-  },
-  link: {
-    type: String,
-  },
-  title: {
-    type: String,
-    required: true,
-  },
+  // link: {
+  //   type: String,
+  // },
+  // title: {
+  //   type: String,
+  //   required: true,
+  // },
+
 });
 
 module.exports = bookSchema;
