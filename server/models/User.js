@@ -18,7 +18,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    // set savedGames to be an array of data that adheres to the gameSchema
+    // set savedGames to be an array of data that matches the gameID
     savedGames: [{
       type: Number,
     }],

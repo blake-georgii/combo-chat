@@ -46,18 +46,11 @@ export const ADD_GAME = gql`
       _id
       username
       email
-      gameCount
       savedGames {
-        author
-        description
-        image
-        link
         gameId
-        title
       }
     }
   }
-
 `;
 
 
