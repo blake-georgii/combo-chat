@@ -30,7 +30,8 @@ const typeDefs = gql`
 
     type Query {
         me: User
-        gameComments: [Comment]
+        listAllSavedGames(gameId: Int!): [Game]
+        returnGame: Game
     }
 
     type Mutation {

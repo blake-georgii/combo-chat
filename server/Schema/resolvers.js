@@ -15,6 +15,25 @@ const resolvers = {
       }
 
       throw new AuthenticationError('Not Logged In')
+    },
+
+    listAllSavedGames: async (parent, { gameId }, context) => {
+      console.log('game query called');
+      var gameIdList = context.user.savedGames;
+      var gameList;
+      gameIdList.map(gameId => {
+        gameList.push(Game.findOne({ gameId: gameId }));
+      });
+
+      return gameList;
+    },
+
+    returnGame: async (parent, { gameId }, context) => {
+      console.log('returnGame query called')
+      const game = await Game.findOne({
+        gameId: gameId
+      });
+      return game;
     }
   },
 
