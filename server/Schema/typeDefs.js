@@ -38,7 +38,7 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         addGameToDB(gameId: String!, title: String!, image:String, link:String, author:[String], description: String!): Game
-        addGameToList(gameId: String!, title: String!, image:String, link:String, author:[String], description: String!): User
+        addGameToList(gameId: String!): User
         removeGameFromList(gameId:String!): User
         addComment(user: String!, text: String): Game
     }   

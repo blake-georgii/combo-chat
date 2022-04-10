@@ -26,22 +26,12 @@ export const ADD_USER = gql`
   }
 `;
 
-export const ADD_GAME = gql`
-  mutation addGame(
+export const ADD_GAME_TO_LIST = gql`
+  mutation addGameToList(
     $gameId: String!
-    $title: String!
-    $image: String
-    $link: String
-    $author: [String]
-    $description: String!
   ) {
-    addGame(
+    addGameToList(
       gameId: $gameId
-      title: $title
-      image: $image
-      link: $link
-      author: $author
-      description: $description
     ) {
       _id
       username
@@ -52,6 +42,33 @@ export const ADD_GAME = gql`
     }
   }
 `;
+
+export const ADD_GAME_TO_DB = gql`
+mutation addGameToDB(
+  $gameId: String!
+  $title: String!
+  $image: String
+  $link: String
+  $author: [String]
+  $description: String!
+) {
+  addGame(
+    gameId: $gameId
+    title: $title
+    image: $image
+    link: $link
+    author: $author
+    description: $description
+  ) {
+    gameId
+    authors
+    description
+    image
+    link
+    title
+    comments
+  }
+}`;
 
 
 export const REMOVE_GAME = gql`

@@ -19,9 +19,10 @@ const userSchema = new Schema(
       required: true,
     },
     // set savedGames to be an array of data that matches the gameID
-    savedGames: [{
-      type: Number,
-    }],
+    savedGames: {
+      type: [Number],
+      default: [0, 1],
+    },
   },
   // set this to use virtual below
   {

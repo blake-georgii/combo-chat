@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
-import { ADD_GAME } from '../utils/mutations';
+import { ADD_GAME_TO_DB, ADD_GAME_TO_LIST } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { saveGameIds, getSavedGameIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client';
@@ -15,7 +15,8 @@ const SearchGames = () => {
   // create state to hold saved gameId values
   const [savedGameIds, setSavedGameIds] = useState(getSavedGameIds());
 
-  const [addGame] = useMutation(ADD_GAME);
+  const [addGameToList] = useMutation(ADD_GAME_TO_LIST);
+  const [addGameToDB] = useMutation(ADD_GAME_TO_DB);
 
   // set up useEffect hook to save `savedGameIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
@@ -66,7 +67,7 @@ const SearchGames = () => {
     }
 
     try {
-      await addGame({
+      await addGameToList({
         variables: {...gameToSave}
       });
 
