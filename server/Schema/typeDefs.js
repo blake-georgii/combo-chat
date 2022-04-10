@@ -15,7 +15,10 @@ const typeDefs = gql`
         image: String
         link: String
         title: String
-        comments: [Comment]
+        comments: [{
+            user: String
+            text: String
+        }]
     }
 
     type Comment {

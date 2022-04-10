@@ -52,7 +52,7 @@ mutation addGameToDB(
   $author: [String]
   $description: String!
 ) {
-  addGame(
+  addGameToDB(
     gameId: $gameId
     title: $title
     image: $image
@@ -61,7 +61,7 @@ mutation addGameToDB(
     description: $description
   ) {
     gameId
-    authors
+    author
     description
     image
     link

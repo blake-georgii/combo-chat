@@ -8,7 +8,7 @@ const gameSchema = new Schema(
       type: String,
       required: true,
     },
-    authors: [
+    author: [
       {
         type: String,
       },

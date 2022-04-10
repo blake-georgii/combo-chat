@@ -67,7 +67,7 @@ const SearchGames = () => {
     }
 
     try {
-      await addGameToList({
+      await addGameToDB({
         variables: {...gameToSave}
       });
 
