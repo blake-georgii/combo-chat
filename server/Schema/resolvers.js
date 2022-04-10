@@ -64,7 +64,6 @@ const resolvers = {
     },
     addGameToDB: async (parent, args, context) => {
       const game = await Game.create(args);
-      console.log('please fucking work')
       return game;
     },
     addGameToList: async (parent, { gameId }, context) => {

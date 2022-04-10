@@ -58,7 +58,8 @@ const SearchGames = () => {
   const handleSaveGame = async (gameId) => {
     // find the game in `searchedGames` state by the matching id
     const gameToSave = searchedGames.find((game) => game.gameId === gameId);
-
+    const title = gameToSave.title;
+    const image = gameToSave.image;
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -67,8 +68,9 @@ const SearchGames = () => {
     }
 
     try {
+      
       await addGameToDB({
-        variables: {...gameToSave}
+        variables: {gameId, title, image}
       });
 
       // if game successfully saves to user's account, save game id to state
@@ -113,7 +115,7 @@ const SearchGames = () => {
         </h2>
         <CardColumns>
           {searchedGames.map((game, index) => {
-            console.log("MY GAME\n\n", game )
+            //console.log("MY GAME\n\n", game )
             return (
               <Card key={index} border='dark'>
                 {game.image ? (

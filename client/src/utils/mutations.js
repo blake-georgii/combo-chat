@@ -45,28 +45,18 @@ export const ADD_GAME_TO_LIST = gql`
 
 export const ADD_GAME_TO_DB = gql`
 mutation addGameToDB(
-  $gameId: String!
+  $gameId: Int!
   $title: String!
   $image: String
-  $link: String
-  $author: [String]
-  $description: String!
 ) {
   addGameToDB(
     gameId: $gameId
     title: $title
     image: $image
-    link: $link
-    author: $author
-    description: $description
   ) {
     gameId
-    author
-    description
-    image
-    link
     title
-    comments
+    image
   }
 }`;
 
