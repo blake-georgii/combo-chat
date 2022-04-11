@@ -68,7 +68,9 @@ const SearchGames = () => {
     }
 
     try {
-      
+      await addGameToList({
+        variables: {gameId}
+      });
       await addGameToDB({
         variables: {gameId, title, image}
       });

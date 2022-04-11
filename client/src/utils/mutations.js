@@ -28,17 +28,15 @@ export const ADD_USER = gql`
 
 export const ADD_GAME_TO_LIST = gql`
   mutation addGameToList(
-    $gameId: String!
+    $gameId: Int!
   ) {
     addGameToList(
-      gameId: $gameId
+      savedGames: $gameId
     ) {
       _id
       username
       email
-      savedGames {
-        gameId
-      }
+      savedGames
     }
   }
 `;

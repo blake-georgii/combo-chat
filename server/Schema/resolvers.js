@@ -17,24 +17,11 @@ const resolvers = {
       throw new AuthenticationError('Not Logged In')
     },
 
-    listAllSavedGames: async (parent, { gameId }, context) => {
+    getAllGames: async (parent, args, context) => {
       console.log('game query called');
-      var gameIdList = context.user.savedGames;
-      var gameList;
-      gameIdList.map(gameId => {
-        gameList.push(Game.findOne({ gameId: gameId }));
-      });
-
-      return gameList;
-    },
-
-    returnGame: async (parent, { gameId }, context) => {
-      console.log('returnGame query called')
-      const game = await Game.findOne({
-        gameId: gameId
-      });
+      var game = await Game.find({});
       return game;
-    }
+    },
   },
 
   Mutation: {
@@ -62,10 +49,12 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+
     addGameToDB: async (parent, args, context) => {
       const game = await Game.create(args);
       return game;
     },
+
     addGameToList: async (parent, { gameId }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
@@ -79,6 +68,7 @@ const resolvers = {
 
       throw new AuthenticationError('User Not Logged In')
     },
+
     removeGameFromList: async (parent, { gameId }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
@@ -92,6 +82,7 @@ const resolvers = {
         return updatedUser;
       }
     },
+
     addComment: async (parent, gameId, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(

@@ -10,3 +10,17 @@ export const GET_ME = gql`
   }
 }
 `;
+
+export const GET_ALL_GAMES = gql`
+{
+  getAllGames {
+    gameId
+    image
+    title
+    comments{
+      user
+      text
+    }
+  }
+}
+`;
