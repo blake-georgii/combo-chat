@@ -11,12 +11,7 @@ const SavedGames = () => {
   let gameQuery = useQuery(GET_ALL_GAMES);
   const [removeGame] = useMutation(REMOVE_GAME)
   const userData = userQuery.data?.me || {};
-
-
-  // let savedGames = gameQuery.data.getAllGames.filter((game) => {
-  //   userData.savedGames.some(userGameId => { game.gameId == userGameId })
-  // })
-
+  
   // create function that accepts the game's mongo _id value as param and deletes the game from the database
   const handleDeleteGame = async (gameId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -37,11 +32,20 @@ const SavedGames = () => {
     }
   };
 
+  function createSavedGamesList() {
+    let savedGamesList = gameQuery.data.getAllGames.filter(game => {
+      var gameId = game.gameId;
+      let saved = userData.savedGames.some(userGameId => { return userGameId == gameId });
+      return saved;
+    });
+    return savedGamesList;
+
+  }
   // if data isn't here yet, say so
   if (userQuery.loading || gameQuery.loading) {
     return <h2>LOADING...</h2>;
   }
-  console.log(gameQuery.data);
+
   return (
     <>
       <Jumbotron fluid className='text-light bg-dark'>
@@ -57,7 +61,8 @@ const SavedGames = () => {
         </h2>
         <CardColumns>
           {
-            gameQuery.data.getAllGames.map((game) => {
+            
+            createSavedGamesList().map((game) => {
               return (
                 <Card key={game.gameId} border='dark'>
                   {game.image ? <Card.Img src={game.image} alt={`The cover for ${game.title}`} variant='top' /> : null}
@@ -70,7 +75,9 @@ const SavedGames = () => {
                 </Card>
               );
             })
-            }
+
+
+          }
         </CardColumns>
       </Container>
     </>

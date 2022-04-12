@@ -55,14 +55,15 @@ const resolvers = {
       return game;
     },
 
-    addGameToList: async (parent, { gameId }, context) => {
+    addGameToList: async (parent, args, context) => {
+      console.log();
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedGames: gameId } },
+          { $addToSet: { savedGames: args.savedGames } },
           { new: true, runValidators: true }
         );
-
+        console.log(updatedUser);
         return updatedUser;
       }
 
