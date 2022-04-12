@@ -1,6 +1,6 @@
 body {
-  font-family: 'Rubik', sans-serif;
-  background-image: url("https://www.fightersgeneration.com/nf9/game/stage/2/mortalkombat2-stage-the-portal.gif");
+  font-family: 'Signika', sans-serif;
+  background-image: url("https://www.fightersgeneration.com/nf9/game/stage/mk2-stage-kombat-tomb.gif");
   background-size: cover;
 
   height: 100vh;
@@ -8,6 +8,12 @@ body {
   margin: 0;
 }
 
+.hero {
+  color: aliceblue;
+  text-shadow: 2px 2px 4px #000000;
+  text-align: center;
+  padding-top: 50px;
+}
 
 h3,
 h4,
@@ -18,11 +24,20 @@ h6 {
 
 .small {
   font-weight: 300;
-  font-style: italic;
+  font-family: 'Signika', sans-serif;
+  
 }
 
 h1,
 h2 {
   font-family: 'Rubik Wet Paint', cursive;
   color: #BB0002;
+  text-shadow: 2px 2px 5px black;
 }
+
+.card {
+  box-shadow: 8px 5px 5px rgba(80, 0, 0, 0.336);
+  background-color: rgb(51, 0, 51);
+  color: aliceblue;
+}
+
