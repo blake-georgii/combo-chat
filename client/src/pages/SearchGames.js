@@ -80,6 +80,7 @@ const SearchGames = () => {
   return (
     <>
       <Jumbotron fluid className='text-light bg-dark'>
+        
         <Container>
           <h1>Search for Games!</h1>
           <Form onSubmit={handleFormSubmit}>
