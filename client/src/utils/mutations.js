@@ -26,38 +26,37 @@ export const ADD_USER = gql`
   }
 `;
 
-export const ADD_GAME = gql`
-  mutation addGame(
-    $gameId: String!
-    $title: String!
-    $image: String
-    $link: String
-    $author: [String]
-    $description: String!
+export const ADD_GAME_TO_LIST = gql`
+  mutation addGameToList(
+    $gameId: Int!
   ) {
-    addGame(
-      gameId: $gameId
-      title: $title
-      image: $image
-      link: $link
-      author: $author
-      description: $description
+    addGameToList(
+      savedGames: $gameId
     ) {
       _id
       username
       email
-      gameCount
-      savedGames {
-        author
-        description
-        image
-        link
-        gameId
-        title
-      }
+      savedGames
     }
   }
 `;
+
+export const ADD_GAME_TO_DB = gql`
+mutation addGameToDB(
+  $gameId: Int!
+  $title: String!
+  $image: String
+) {
+  addGameToDB(
+    gameId: $gameId
+    title: $title
+    image: $image
+  ) {
+    gameId
+    title
+    image
+  }
+}`;
 
 
 export const REMOVE_GAME = gql`

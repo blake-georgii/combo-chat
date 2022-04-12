@@ -18,12 +18,12 @@ const SavedGames = () => {
     if (!token) {
       return false;
     }
- 
+
     try {
       await removeGame({
-        variables: { gameId: gameId}
+        variables: { gameId: gameId }
       });
-      
+
       // upon success, remove game's id from localStorage
       removeGameId(gameId);
     } catch (err) {
@@ -32,10 +32,10 @@ const SavedGames = () => {
   };
 
   // if data isn't here yet, say so
-  if (loading) {
+  if (userQuery.loading || gameQuery.loading) {
     return <h2>LOADING...</h2>;
   }
-
+  console.log(gameQuery.data);
   return (
     <>
       <Jumbotron fluid className='text-light bg-dark'>
@@ -50,21 +50,21 @@ const SavedGames = () => {
             : 'You have no saved games!'}
         </h2>
         <CardColumns>
-          {userData.savedGames.map((game) => {
-            return (
-              <Card key={game.gameId} border='dark'>
-                {game.background_image ? <Card.Img src={game.image} alt={`The cover for ${game.title}`} variant='top' /> : null}
-                <Card.Body>
-                  <Card.Title>{game.title}</Card.Title>
-                  <p className='small'>Title: {game.name}</p>
-                  <Card.Text>{game.description}</Card.Text>
-                  <Button className='btn-block btn-danger' onClick={() => handleDeleteGame(game.gameId)}>
-                    Delete this Game!
-                  </Button>
-                </Card.Body>
-              </Card>
-            );
-          })}
+          {
+            gameQuery.data.getAllGames.map((game) => {
+              return (
+                <Card key={game.gameId} border='dark'>
+                  {game.image ? <Card.Img src={game.image} alt={`The cover for ${game.title}`} variant='top' /> : null}
+                  <Card.Body>
+                    <Card.Title>{game.title}</Card.Title>
+                    <Button className='btn-block btn-danger' onClick={() => handleDeleteGame(game.gameId)}>
+                      Delete this Game!
+                    </Button>
+                  </Card.Body>
+                </Card>
+              );
+            })
+            }
         </CardColumns>
       </Container>
     </>

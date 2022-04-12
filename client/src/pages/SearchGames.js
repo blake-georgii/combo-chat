@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
-import { ADD_GAME } from '../utils/mutations';
+import { ADD_GAME_TO_DB, ADD_GAME_TO_LIST } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { saveGameIds, getSavedGameIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client';
@@ -15,7 +15,8 @@ const SearchGames = () => {
   // create state to hold saved gameId values
   const [savedGameIds, setSavedGameIds] = useState(getSavedGameIds());
 
-  const [addGame] = useMutation(ADD_GAME);
+  const [addGameToList] = useMutation(ADD_GAME_TO_LIST);
+  const [addGameToDB] = useMutation(ADD_GAME_TO_DB);
 
   // set up useEffect hook to save `savedGameIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
@@ -57,7 +58,8 @@ const SearchGames = () => {
   const handleSaveGame = async (gameId) => {
     // find the game in `searchedGames` state by the matching id
     const gameToSave = searchedGames.find((game) => game.gameId === gameId);
-
+    const title = gameToSave.title;
+    const image = gameToSave.image;
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -66,8 +68,11 @@ const SearchGames = () => {
     }
 
     try {
-      await addGame({
-        variables: {...gameToSave}
+      await addGameToList({
+        variables: {gameId}
+      });
+      await addGameToDB({
+        variables: {gameId, title, image}
       });
 
       // if game successfully saves to user's account, save game id to state
@@ -80,7 +85,6 @@ const SearchGames = () => {
   return (
     <>
       <Jumbotron fluid className='text-light bg-dark'>
-        
         <Container>
           <h1>Search for Games!</h1>
           <Form onSubmit={handleFormSubmit}>
@@ -113,7 +117,7 @@ const SearchGames = () => {
         </h2>
         <CardColumns>
           {searchedGames.map((game, index) => {
-            console.log("MY GAME\n\n", game )
+            //console.log("MY GAME\n\n", game )
             return (
               <Card key={index} border='dark'>
                 {game.image ? (
@@ -130,7 +134,7 @@ const SearchGames = () => {
                       onClick={() => handleSaveGame(game.gameId)}>
                       {savedGameIds?.some((savedGameId) => savedGameId === game.gameId)
                         ? 'This game has already been saved!'
-                        : 'Add Comment!'}
+                        : 'Save this Game!'}
                     </Button>
                   )}
                 </Card.Body>

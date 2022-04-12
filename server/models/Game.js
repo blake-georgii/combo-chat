@@ -4,29 +4,17 @@ const commentSchema = require('./Comment');
 // This is a subdocument schema, it won't become its own model but we'll use it as the schema for the User's `savedBooks` array in User.js
 const gameSchema = new Schema(
   {
+     // saved game id from IGdb
     gameId: {
-      type: String,
+      type: Number,
       required: true,
-    },
-    authors: [
-      {
-        type: String,
-      },
-    ],
-    description: {
-      type: String,
-      required: true,
-    },
-    // saved game id from IGdb
-    image: {
-      type: String,
-    },
-    link: {
-      type: String,
     },
     title: {
       type: String,
       required: true,
+    },
+    image: {
+      type: String,
     },
     comments: [commentSchema],
   },
