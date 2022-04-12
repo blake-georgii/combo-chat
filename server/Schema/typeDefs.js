@@ -7,12 +7,10 @@ const typeDefs = gql`
         email: String
         savedGames: [Int]
     }
-
     type Comment {
         user: String
         text: String
     }
-
     type Game {
         gameId: String
         title: String

@@ -1,15 +1,21 @@
 import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
-import{ REMOVE_GAME } from '../utils/mutations';
-import{GET_ME} from '../utils/queries';
+import { REMOVE_GAME } from '../utils/mutations';
+import { GET_ME, GET_ALL_GAMES } from '../utils/queries';
 import { useMutation, useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
 import { removeGameId } from '../utils/localStorage';
 
 const SavedGames = () => {
-  const { loading, data } = useQuery(GET_ME);
-  const [removeGame]= useMutation(REMOVE_GAME)
-  const userData = data?.me || {};
+  let userQuery = useQuery(GET_ME);
+  let gameQuery = useQuery(GET_ALL_GAMES);
+  const [removeGame] = useMutation(REMOVE_GAME)
+  const userData = userQuery.data?.me || {};
+
+
+  // let savedGames = gameQuery.data.getAllGames.filter((game) => {
+  //   userData.savedGames.some(userGameId => { game.gameId == userGameId })
+  // })
 
   // create function that accepts the game's mongo _id value as param and deletes the game from the database
   const handleDeleteGame = async (gameId) => {

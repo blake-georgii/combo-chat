@@ -82,8 +82,6 @@ const resolvers = {
         return updatedUser;
       }
     },
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
 
     addComment: async (parent, gameId, context) => {
       if (context.user) {

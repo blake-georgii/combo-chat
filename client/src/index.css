@@ -2,11 +2,11 @@ body {
   font-family: 'Signika', sans-serif;
   background-image: url("https://www.fightersgeneration.com/nf9/game/stage/mk2-stage-kombat-tomb.gif");
   background-size: cover;
-
   height: 100vh;
   padding: 0;
   margin: 0;
 }
+
 
 .hero {
   color: aliceblue;
@@ -40,4 +40,6 @@ h2 {
   background-color: rgb(51, 0, 51);
   color: aliceblue;
 }
+
+
 

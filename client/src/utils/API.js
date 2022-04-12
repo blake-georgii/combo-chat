@@ -55,4 +55,3 @@ export const searchGames = (query) => {
   return fetch(`https://api.rawg.io/api/games?search=${query}&key=${process.env.REACT_APP_RAWG_KEY}
   `);
 };
-
