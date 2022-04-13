@@ -5,43 +5,43 @@
 // import { useMutation, useQuery } from '@apollo/client';
 // import Auth from '../utils/auth';
 // import { removeGameId } from '../utils/localStorage';
- 
+
 // const GamePage = () => {
 // //  let userQuery = useQuery(GET_ME);
 // //  let gameQuery = useQuery(GET_ALL_GAMES);
 // //  const userData = userQuery.data?.me || {};
- 
- 
+
+
 //  const handleFormSubmit = async (event) => {
 //  event.preventDefault();
- 
+
 //  if (!searchInput) {
 //  return false;
 //   }
- 
+
 //  try {
 //    const response = await searchGames(searchInput);
- 
+
 //  if (!response.ok) {
 //      throw new Error('something went wrong!');
 //     }
- 
+
 //     const items = await response.json();
- 
+
 //    const commentsData = items.results.map((game) => ({
 //      gameId: game.id,
 //      title: game.name || ['No author to display'],
 //      image: game.background_image || '',
 // 	// Comments: comments
 //    }));
- 
+
 //    setSearchedGames(commentsData);
 //     setSearchInput('');
 //    } catch (err) {
 //     console.error(err);
 //    }
 //  };
- 
+
 //  function createSavedGamesComments() {
 //    let savedGamesList = gameQuery.data.getAllGames.filter(game => {
 //      var gameId = game.gameId;
@@ -49,19 +49,19 @@
 //      return saved;
 //    });
 //    return savedGamesList;
- 
+
 //  }
 //  // if data isn't here yet, say so
 //  if (userQuery.loading || gameQuery.loading) {
 //    return <h2>LOADING...</h2>;
 //  }
- 
+
 //  return (
 //    <>
 //      <Jumbotron fluid className='text-light bg-dark'>
 //        <Container>
 //          <h1>Comments Page</h1>
- 
+
 //          {/* <form>
 //         <input
 //           value={text}
@@ -80,8 +80,8 @@
 //             </button>
 //         </div>
 //       </form>) */}
- 
-        
+
+
 //        </Container>
 //      </Jumbotron>
 //      <Container>
@@ -92,7 +92,7 @@
 //        </h2>
 //        <CardColumns>
 //          {
-          
+
 //            createSavedGamesComments().map((game) => {
 //              return (
 //                <Card key={game.gameId} border='dark'>
@@ -109,60 +109,69 @@
 //    </>
 //  );
 // };
- 
+
 // export default GamePage;
 
 
-import React, {useState} from "react"
-import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
+import React, { useState } from "react"
+import { useLocation } from "react-router-dom";
+import { GET_ME, GET_ALL_GAMES } from '../utils/queries';
+import { useMutation, useQuery } from '@apollo/client';
+// import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
-const GamePage=({
+
+const GamePage = ({
   cancel,
   parentId,
   value,
   edit,
   submit,
   handleCancel,
-  })=>{
-    const [text, setText] = useState(value)
+}) => {
 
-    const handleChange = (e) => {
-        setText(e.target.value)
-      }
-    return(  
+  const [text, setText] = useState(value)
+  const location = useLocation();
+  let userQuery = useQuery(GET_ME);
+  let gameQuery = useQuery(GET_ALL_GAMES);
+  const userData = userQuery.data?.me || {};
+  const currentGameId = new URLSearchParams(location.search).get('gameId')
 
-    
+  let game = gameQuery.data.getAllGames.filter(game => {return game.gameId == currentGameId})[0];
+  console.log(game);
+
+  const username = userData.username;
+  console.log(username);
+
+  const handleChange = (e) => {
+    setText(e.target.value)
+  }
+  return (
+
+
     <form>
-      <h1>Chat Room</h1>
+      <h1>{game.title}</h1>
 
-        <input
-          value={text}
-          onChange={handleChange}
-        />
-        <div >
-          <button
-            onClick={() =>submit(cancel, text, parentId, edit, setText)}
-            type='button'
-            disabled={!text}
-          >
-            Post
-          </button>
-            <button onClick={() => handleCancel(cancel ,edit)}>
-              Cancel
-            </button>
-        </div>
-      {/* <container>
-        <Card>
-                <Card.Body>
-                  <Card.Title></Card.Title>
-                  <p className='small'>Text</p>
-                  <Card.Text>Text Here</Card.Text>
-                </Card.Body>
-              </Card>
+      <input 
+        value={text}
+        onChange={handleChange}
+      />
+      <div >
+        <button
+          onClick={() => submit(cancel, text, parentId, edit, setText)}
+          type='button'
+          disabled={!text}
+>
+          Post
+        </button>
+        <button onClick={() => handleCancel(cancel, edit)}>
+          Cancel
+        </button>
+      </div>
+    </form>)
+}
 
-      </container> */}
 
-      </form>)}
+
 
 export default GamePage;
 
