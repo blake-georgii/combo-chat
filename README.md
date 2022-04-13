@@ -29,7 +29,7 @@
  The project's intended use is to display fighting games.  The user then can save games they are interested in to a list.  The user can add comments to the discussion board to discuss different fighting games.  
 
  ## Contributing 
- Adilene Rodriguez Bejinees, Blake Georgii, Matt Foster, Bianca Tijerino
+ Adilene Rodriguez Bejinees, Blake Georgii, Matt Foster, Bianca Tijerino, Ian Linton
 
  ## License 
  This project has a project license of MIT.  
