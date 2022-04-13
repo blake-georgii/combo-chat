@@ -116,9 +116,8 @@
 import React, { useState } from "react"
 import { useLocation } from "react-router-dom";
 import { GET_ME, GET_ALL_GAMES } from '../utils/queries';
+import { ADD_COMMENT } from '../utils/mutations';
 import { useMutation, useQuery } from '@apollo/client';
-// import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
-
 
 const GamePage = ({
   cancel,
@@ -133,46 +132,70 @@ const GamePage = ({
   const location = useLocation();
   let userQuery = useQuery(GET_ME);
   let gameQuery = useQuery(GET_ALL_GAMES);
+  const [addComment] = useMutation(ADD_COMMENT);
   const userData = userQuery.data?.me || {};
   const currentGameId = new URLSearchParams(location.search).get('gameId')
+  
 
-  let game = gameQuery.data.getAllGames.filter(game => {return game.gameId == currentGameId})[0];
-  console.log(game);
-
-  const username = userData.username;
-  console.log(username);
+  const game = gameQuery.data.getAllGames.filter(game => { return game.gameId == currentGameId })[0];
 
   const handleChange = (e) => {
     setText(e.target.value)
   }
+
+  const handleAddComment = async (text) => {
+    let gameId = parseInt(game.gameId);
+    console.log(text);
+    try {
+      await addComment({
+        variables: { gameId, text }
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // game variable data looks like {gameId, image, title, [comments{user, text}]}
+  // comments is an array of objects with the variables user and text
+  console.log(game.comments);
+
+
   return (
 
 
     <form>
-      <h1>{game.title}</h1>
+      <h1>{game.title} Chat Room</h1>
 
+    
       <input 
         value={text}
         onChange={handleChange}
       />
-      <div >
+      <div>
         <button
-          onClick={() => submit(cancel, text, parentId, edit, setText)}
+          onClick={() => {
+            handleAddComment(text);
+          }}
           type='button'
           disabled={!text}
->
+        >
           Post
         </button>
         <button onClick={() => handleCancel(cancel, edit)}>
           Cancel
         </button>
       </div>
+      {
+        game.comments.map((comment) => {
+          return (
+            <div>
+              <h3>{comment.user}</h3>
+              <p>{comment.text}</p>
+            </div>
+          );
+        })
+      }
     </form>)
 }
 
-
-
-
 export default GamePage;
-
-

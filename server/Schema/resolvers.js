@@ -84,17 +84,24 @@ const resolvers = {
       }
     },
 
-    addComment: async (parent, gameId, context) => {
+    addComment: async (parent, { gameId, text }, context) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { savedGames: { GameId: GameId } } },
-          { new: true }
+        const updatedGame = await Game.findOneAndUpdate(
+          { gameId: gameId },
+          {
+            $push: {
+              comments: {
+                user: context.user.username,
+                text: text
+              }
+            }
+          },
         );
-        if (!updatedUser) {
+        console.log(updatedGame);
+        if (!updatedGame) {
           throw new AuthenticationError("Couldn't find user with that Id")
         }
-        return updatedUser;
+        return updatedGame;
       }
     }
   }

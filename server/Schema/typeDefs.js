@@ -36,7 +36,7 @@ const typeDefs = gql`
         addGameToDB(gameId: Int!, title: String!, image:String): Game
         addGameToList(savedGames: Int!): User
         removeGameFromList(gameId:String!): User
-        addComment(user: String!, text: String): Game
+        addComment(gameId: Int! text: String!): Game
     }   
 `;
 
