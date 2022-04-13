@@ -29,9 +29,6 @@ const AppNavbar = () => {
                   <Nav.Link as={Link} to='/saved'>
                     See Your Games
                   </Nav.Link>
-                  <Nav.Link as={Link} to='/comments'>
-                    Comments
-                  </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (

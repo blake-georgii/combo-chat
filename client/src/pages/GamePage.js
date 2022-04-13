@@ -136,7 +136,7 @@ const GamePage = ({
   const userData = userQuery.data?.me || {};
   const currentGameId = new URLSearchParams(location.search).get('gameId')
 
-  let game = gameQuery.data.getAllGames.filter(game => { return game.gameId == currentGameId })[0];
+  const game = gameQuery.data.getAllGames.filter(game => { return game.gameId == currentGameId })[0];
   console.log(game);
 
   const username = userData.username;
@@ -156,6 +156,10 @@ const GamePage = ({
       console.error(err);
     }
   }
+
+  // game variable data looks like {gameId, image, title, [comments{user, text}]}
+  // comments is an array of objects with the variables user and text
+
 
   return (
 
