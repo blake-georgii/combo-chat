@@ -9,6 +9,8 @@ import { setContext } from '@apollo/client/link/context';
 import SearchGames from './pages/SearchGames';
 import SavedGames from './pages/SavedGames';
 import Navbar from './components/Navbar';
+import GamePage from './pages/GamePage';
+
 
 //create link to the graphql server using proxy in package.json
 const httpLink = createHttpLink({
@@ -40,6 +42,7 @@ export function App() {
         <Switch>
           <Route exact path='/' component={SearchGames} />
           <Route exact path='/saved' component={SavedGames} />
+          <Route exact path='/comments' component={GamePage} />
           <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
         </Switch>
       </>

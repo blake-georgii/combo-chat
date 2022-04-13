@@ -19,7 +19,7 @@ const AppNavbar = () => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
-            <Nav className='ml-auto'>
+            <Nav className='ml-auto'> 
               <Nav.Link as={Link} to='/'>
                 Search For Games
               </Nav.Link>
@@ -28,6 +28,9 @@ const AppNavbar = () => {
                 <>
                   <Nav.Link as={Link} to='/saved'>
                     See Your Games
+                  </Nav.Link>
+                  <Nav.Link as={Link} to='/comments'>
+                    Comments
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
