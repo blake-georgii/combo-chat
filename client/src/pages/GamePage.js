@@ -138,9 +138,6 @@ const GamePage = ({
 
   const game = gameQuery.data.getAllGames.filter(game => { return game.gameId == currentGameId })[0];
 
-  const username = userData.username
-
-
   const handleChange = (e) => {
     setText(e.target.value)
   }
@@ -166,7 +163,7 @@ const GamePage = ({
 
 
     <form>
-      <h1>Chat Room</h1>
+      <h1>{game.title} Chat Room</h1>
 
       <input
         value={text}
@@ -186,6 +183,16 @@ const GamePage = ({
           Cancel
         </button>
       </div>
+      {
+        game.comments.map((comment) => {
+          return (
+            <div>
+              <h3>{comment.user}</h3>
+              <p>{comment.text}</p>
+            </div>
+          );
+        })
+      }
     </form>)
 }
 

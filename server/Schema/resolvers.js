@@ -97,6 +97,7 @@ const resolvers = {
             }
           },
         );
+        console.log(updatedGame);
         if (!updatedGame) {
           throw new AuthenticationError("Couldn't find user with that Id")
         }
