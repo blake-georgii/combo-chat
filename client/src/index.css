@@ -15,7 +15,18 @@ body {
   padding-top: 50px;
 }
 
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  color: black; 
+}
+
 h3,
+p 
+{
+  font-family:Verdana, Geneva, Tahoma, sans-serif; 
+  color:antiquewhite; 
+}
 h4,
 h5,
 h6 {

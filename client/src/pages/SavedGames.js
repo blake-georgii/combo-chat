@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 import { REMOVE_GAME } from '../utils/mutations';
 import { GET_ME, GET_ALL_GAMES } from '../utils/queries';
@@ -68,9 +69,12 @@ const SavedGames = () => {
                   {game.image ? <Card.Img src={game.image} alt={`The cover for ${game.title}`} variant='top' /> : null}
                   <Card.Body>
                     <Card.Title>{game.title}</Card.Title>
-                    <Button className='btn-block btn-danger' onClick={() => handleDeleteGame(game.gameId)}>
-                      Delete this Game!
+                    <Button className='btn-block btn-primary' as={Link} to={{pathname:"/comments",search: `?gameId=${game.gameId}`}}>
+                      Chat About This Game!
                     </Button>
+                    {/* <Button className='btn-block btn-danger' onClick={() => handleDeleteGame(game.gameId)}>
+                      Delete this Game!
+                    </Button> */}
                   </Card.Body>
                 </Card>
               );
