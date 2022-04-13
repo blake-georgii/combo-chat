@@ -116,6 +116,7 @@
 import React, { useState } from "react"
 import { useLocation } from "react-router-dom";
 import { GET_ME, GET_ALL_GAMES } from '../utils/queries';
+import { ADD_COMMENT } from '../utils/mutations';
 import { useMutation, useQuery } from '@apollo/client';
 
 const GamePage = ({
@@ -131,10 +132,11 @@ const GamePage = ({
   const location = useLocation();
   let userQuery = useQuery(GET_ME);
   let gameQuery = useQuery(GET_ALL_GAMES);
+  const [addComment] = useMutation(ADD_COMMENT);
   const userData = userQuery.data?.me || {};
   const currentGameId = new URLSearchParams(location.search).get('gameId')
 
-  let game = gameQuery.data.getAllGames.filter(game => {return game.gameId == currentGameId})[0];
+  let game = gameQuery.data.getAllGames.filter(game => { return game.gameId == currentGameId })[0];
   console.log(game);
 
   const username = userData.username;
@@ -143,6 +145,18 @@ const GamePage = ({
   const handleChange = (e) => {
     setText(e.target.value)
   }
+
+  const handleAddComment = async (text) => {
+    let gameId = parseInt(game.gameId);
+    try {
+      await addComment({
+        variables: { gameId, text }
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
 
 
@@ -155,7 +169,9 @@ const GamePage = ({
       />
       <div >
         <button
-          onClick={() => submit(cancel, text, parentId, edit, setText)}
+          onClick={() => {
+            handleAddComment(text);
+          }}
           type='button'
           disabled={!text}
         >

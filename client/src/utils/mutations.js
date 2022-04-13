@@ -69,4 +69,23 @@ mutation removeGame($gameId: String!) {
 }
 `;
 
+export const ADD_COMMENT = gql`
+mutation addComment(
+  $gameId: Int!
+  $text: String!
+) {
+  addComment(
+    gameId: $gameId
+    text: $text
+  ) {
+    gameId
+    title
+    image
+    comments{
+      user
+      text
+    }
+  }
+}
+`;
 
