@@ -89,7 +89,7 @@ const resolvers = {
         const updatedGame = await Game.findOneAndUpdate(
           { gameId: gameId },
           {
-            $pull: {
+            $push: {
               comments: {
                 user: context.user.username,
                 text: text

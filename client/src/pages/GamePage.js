@@ -137,10 +137,9 @@ const GamePage = ({
   const currentGameId = new URLSearchParams(location.search).get('gameId')
 
   const game = gameQuery.data.getAllGames.filter(game => { return game.gameId == currentGameId })[0];
-  console.log(game);
 
-  const username = userData.username;
-  console.log(username);
+  const username = userData.username
+
 
   const handleChange = (e) => {
     setText(e.target.value)
@@ -148,6 +147,7 @@ const GamePage = ({
 
   const handleAddComment = async (text) => {
     let gameId = parseInt(game.gameId);
+    console.log(text);
     try {
       await addComment({
         variables: { gameId, text }
@@ -159,6 +159,7 @@ const GamePage = ({
 
   // game variable data looks like {gameId, image, title, [comments{user, text}]}
   // comments is an array of objects with the variables user and text
+  console.log(game.comments);
 
 
   return (
