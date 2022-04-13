@@ -114,6 +114,7 @@
 
 
 import React, {useState} from "react"
+import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 const GamePage=({
   cancel,
@@ -150,6 +151,17 @@ const GamePage=({
               Cancel
             </button>
         </div>
+      {/* <container>
+        <Card>
+                <Card.Body>
+                  <Card.Title></Card.Title>
+                  <p className='small'>Text</p>
+                  <Card.Text>Text Here</Card.Text>
+                </Card.Body>
+              </Card>
+
+      </container> */}
+
       </form>)}
 
 export default GamePage;
