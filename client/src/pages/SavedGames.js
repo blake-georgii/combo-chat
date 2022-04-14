@@ -39,6 +39,7 @@ const SavedGames = () => {
       let saved = userData.savedGames.some(userGameId => { return userGameId == gameId });
       return saved;
     });
+    
     return savedGamesList;
 
   }
