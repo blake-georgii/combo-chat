@@ -51,8 +51,16 @@ const resolvers = {
     },
 
     addGameToDB: async (parent, args, context) => {
-      const game = await Game.create(args);
-      return game;
+
+      const currentGames = await Game.find();
+      const currentGameIds = currentGames.map(game => { return game.gameId });
+      if (currentGameIds.every(id => { id != args.gameId}) ){
+        const game = await Game.create(args);
+        console.log(game);
+        return game;
+      }
+      return -1;
+      
     },
 
     addGameToList: async (parent, args, context) => {
