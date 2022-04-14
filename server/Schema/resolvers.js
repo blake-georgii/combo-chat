@@ -54,7 +54,7 @@ const resolvers = {
 
       const currentGames = await Game.find();
       const currentGameIds = currentGames.map(game => { return game.gameId });
-      if (currentGameIds.every(id => { id != args.gameId}) ){
+      if (currentGameIds.every(id => {return id != args.gameId}) ){
         const game = await Game.create(args);
         console.log(game);
         return game;
